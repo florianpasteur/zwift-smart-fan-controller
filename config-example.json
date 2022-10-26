@@ -1,0 +1,29 @@
+{
+  "fanIP": "192.168.1.41",
+  "dataSource": "ant",
+  "trigger": "hr",
+  "antConfig": {
+    "wheelCircumference": 2.120
+  },
+  "zwiftConfig": {
+    "zwiftID": 1231421,
+    "pullingInterval": 500
+  },
+  "thresholds": {
+    "watts": {
+      "level1": 0,
+      "level2": 160,
+      "level3": 280
+    },
+    "speed": {
+      "level1": 0,
+      "level2": 20,
+      "level3": 30
+    },
+    "hr": {
+      "level1": 70,
+      "level2": 120,
+      "level3": 150
+    }
+  }
+}

@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Interface to control a DIY Smart Fan with Zwift or Ant+",
   "main": "index.js",
+  "bin": "./cli/zwift-smart-fan-controller.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "husky install"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,15 @@
     "DIY"
   ],
   "author": "Florian P.",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^8.0.1"
+  },
+  "dependencies": {
+    "ant-plus": "^0.1.24",
+    "axios": "^0.27.2",
+    "inquirer": "^9.1.4",
+    "rxjs": "^7.5.7",
+    "yargs": "^17.6.0"
+  }
 }
