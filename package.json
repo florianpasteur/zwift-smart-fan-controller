@@ -1,0 +1,22 @@
+{
+  "name": "zwift-smart-fan-controller",
+  "version": "1.0.0",
+  "description": "Interface to control a DIY Smart Fan with Zwift or Ant+",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:florianpasteur/zwift-smart-fan-controller.git"
+  },
+  "keywords": [
+    "Zwift",
+    "Fan",
+    "Ant",
+    "Ant+",
+    "DIY"
+  ],
+  "author": "Florian P.",
+  "license": "MIT"
+}
