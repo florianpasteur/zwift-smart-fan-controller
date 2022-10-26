@@ -2,8 +2,10 @@ const fs = require('fs');
 const Ant = require('../ant-plus/ant-plus');
 const Zwift = require('../zwift/zwift');
 const SmartFan = require('../smart-fan/smart-fan');
+const yargs = require("yargs");
+const {hideBin} = require("yargs/helpers");
 
-const options = await yargs(hideBin(process.argv))
+const options = yargs(hideBin(process.argv))
     .option('config', {
         type: 'string',
         description: 'path to JSON config file',
@@ -16,20 +18,20 @@ function getDataSource(config) {
         case "ant":
             return  new Ant({wheelCircumference: config.antConfig.wheelCircumference});
         case "zwift":
-            return new Zwift()
+            return new Zwift({zwiftID: config.zwiftConfig.zwiftID, pullingInterval: config.zwiftConfig.pullingInterval})
         default:
             throw new Error('Unsupported data source:  ' + config.dataSource);
     }
 }
 
 function getLevel(value, thresholds) {
-    if (thresholds.level3 >= value) {
+    if (value >= thresholds.level3) {
         return 3
     }
-    if (thresholds.level2 >= value) {
+    if (value >= thresholds.level2) {
         return 2
     }
-    if (thresholds.level1 >= value) {
+    if (value >= thresholds.level1) {
         return 1
     }
     return 0;
@@ -41,9 +43,10 @@ if (fs.existsSync(options.config)) {
     const smartFan = SmartFan({fanIP: config.fanIP});
 
     switch (config.trigger) {
-        case "watts":
-            dataSource.watts$.subscribe(value => {
-                const thresholds = config.thresholds.watts;
+        case "power":
+            dataSource.power$.subscribe(value => {
+                console.log("Power", value);
+                const thresholds = config.thresholds.power;
                 const level = getLevel(value, thresholds);
                 smartFan.fanLevel(level);
             })

@@ -10,7 +10,7 @@
     "pullingInterval": 500
   },
   "thresholds": {
-    "watts": {
+    "power": {
       "level1": 0,
       "level2": 160,
       "level3": 280

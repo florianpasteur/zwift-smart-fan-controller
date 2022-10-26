@@ -1,13 +1,13 @@
 const {Observable, Subject} = require("rxjs");
 const axios = require("axios");
 
-module.exports = function ({zwiftId, pullingInterval}) {
+module.exports = function ({zwiftID, pullingInterval}) {
 
     const subject= new Subject();
 
 
     const power$ = new Observable(observer => {
-        subject.subscribe(({watts}) => observer.next(watts))
+        subject.subscribe(({power}) => observer.next(power))
     });
     const speed$ = new Observable(observer => {
         subject.subscribe(({speed}) => observer.next(speed))
@@ -18,23 +18,28 @@ module.exports = function ({zwiftId, pullingInterval}) {
 
 
     setInterval(async () => {
-        const response = await axios.get('https://www.zwiftgps.com/world/', {
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Cookie': 'zssToken=rider-'+zwiftId,
-            }
-        });
-        const data = response.data;
-        subject.next({
-            watts: data.powerOutput,
-            speed: data.speedInMillimetersPerHour / (1000 * 1000), // to kmh
-            hr: data.heartRateInBpm,
-        })
+        try {
+
+            const response = await axios.get('https://www.zwiftgps.com/world/', {
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Cookie': 'zssToken=rider-'+zwiftID,
+                }
+            });
+            const data = response.data.positions[0] || {};
+            subject.next({
+                power: data.powerOutput,
+                speed: data.speedInMillimetersPerHour / (1000 * 1000), // to kmh
+                hr: data.heartRateInBpm,
+            })
+        } catch (e) {
+            console.error(e)
+        }
     }, pullingInterval)
 
     return {
-        hr$,
+        power$,
         speed$,
-        power$
+        hr$,
     }
 }

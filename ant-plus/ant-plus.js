@@ -14,9 +14,10 @@ module.exports = function ({wheelCircumference}) {
         powerSensor.attach(0, 0);
     });
 
-    const hr$ = new Observable(observer => {
-        hrSensor.on('hbData', async function (data) {
-            observer.next(data.ComputedHeartRate)
+    const power$ = new Observable(observer => {
+        powerSensor.on('powerData', data => {
+            observer.next(data.Power)
+            console.log(`id: ${data.DeviceID}, cadence: ${data.Cadence}, power: ${data.Power}`);
         });
     });
 
@@ -31,10 +32,9 @@ module.exports = function ({wheelCircumference}) {
         });
     });
 
-    const power$ = new Observable(observer => {
-        powerSensor.on('powerData', data => {
-            observer.next(data.Power)
-            console.log(`id: ${data.DeviceID}, cadence: ${data.Cadence}, power: ${data.Power}`);
+    const hr$ = new Observable(observer => {
+        hrSensor.on('hbData', async function (data) {
+            observer.next(data.ComputedHeartRate)
         });
     });
 
@@ -43,8 +43,8 @@ module.exports = function ({wheelCircumference}) {
     }
 
     return {
-        hr$,
+        power$,
         speed$,
-        power$
+        hr$,
     }
 }
