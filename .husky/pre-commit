@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+DOC=$(./cli/zwift-smart-fan-controller.js --help)
+npm run hooks:pre-commit -- "$DOC"
+git add README.md

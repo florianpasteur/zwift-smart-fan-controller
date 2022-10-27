@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fs = require('fs');
 const Ant = require('../data-provider/ant-plus/ant-plus');
 const Zwift = require('../data-provider/zwift/zwift');

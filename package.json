@@ -5,7 +5,8 @@
   "main": "index.js",
   "bin": "./cli/zwift-smart-fan-controller.js",
   "scripts": {
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "hooks:pre-commit": "node .husky/pre-commit.js"
   },
   "repository": {
     "type": "git",
