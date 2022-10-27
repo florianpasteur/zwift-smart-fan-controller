@@ -7,7 +7,7 @@
 Options:
   --help     Show help                                                 [boolean]
   --version  Show version number                                       [boolean]
-  --config   path to JSON config file                    [string] [default: "."]
+  --config   path to JSON config file                                   [string]
  
 ```
 <!-- end-command-documentation -->

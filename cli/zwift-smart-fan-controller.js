@@ -12,7 +12,6 @@ const options = yargs(hideBin(process.argv))
     .option('config', {
         type: 'string',
         description: 'path to JSON config file',
-        default: '.',
     }).parseSync();
 
 
