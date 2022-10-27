@@ -1,6 +1,7 @@
 const fs = require('fs');
 const Ant = require('../data-provider/ant-plus/ant-plus');
 const Zwift = require('../data-provider/zwift/zwift');
+const Mock = require('../data-provider/mock/mock');
 const SmartFan = require('../device-controller/smart-fan/smart-fan');
 const yargs = require("yargs");
 const {hideBin} = require("yargs/helpers");
@@ -19,8 +20,10 @@ function getDataSource(config) {
             return  new Ant({wheelCircumference: config.antConfig.wheelCircumference});
         case "zwift":
             return new Zwift({zwiftID: config.zwiftConfig.zwiftID, pullingInterval: config.zwiftConfig.pullingInterval})
+        case "mock":
+            return new Mock({pullingInterval: 5000})
         default:
-            throw new Error('Unsupported data source:  ' + config.dataSource);
+            throw new Error('Unsupported data provider:  ' + config.dataProvider);
     }
 }
 
