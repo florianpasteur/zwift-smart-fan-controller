@@ -7,7 +7,7 @@
   },
   "zwiftConfig": {
     "zwiftID": 1231421,
-    "pullingInterval": 500
+    "pullingInterval": 2500
   },
   "thresholds": {
     "power": {
