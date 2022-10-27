@@ -1,4 +1,3 @@
-const Ant = require('ant-plus');
 const axios = require('axios');
 
 
@@ -23,7 +22,6 @@ module.exports = function ({fanIP}) {
 
     async function on(index) {
         const isOn = (await getStatus())[index];
-        console.log("Toggle ", index, " is ", isOn)
         if (!isOn) {
             await toggle(index)
         }
@@ -37,7 +35,7 @@ module.exports = function ({fanIP}) {
     }
 
     async function fanLevel(level) {
-        console.log("Fan Level to: ", level)
+        console.log("🌡 Fan Level: ", level)
         switch (level) {
             case 0:
                 return await Promise.all([off(0), off(1), off(2)]);

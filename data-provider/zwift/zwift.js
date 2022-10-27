@@ -2,20 +2,19 @@ const {Observable, Subject} = require("rxjs");
 const axios = require("axios");
 
 module.exports = function ({zwiftID, pullingInterval}) {
-
     const subject= new Subject();
-
-
     const power$ = new Observable(observer => {
+        console.log(`⚡️ Zwift Power: ${data.Power}`);
         subject.subscribe(({power}) => observer.next(power))
     });
     const speed$ = new Observable(observer => {
+        console.log(`🏎️ Zwift Speed: ${data.CalculatedSpeed}`);
         subject.subscribe(({speed}) => observer.next(speed))
     });
     const hr$ = new Observable(observer => {
+        console.log(`🧡 Zwift HR: ${data.ComputedHeartRate}`);
         subject.subscribe(({hr}) => observer.next(hr))
     });
-
 
     setInterval(async () => {
         try {

@@ -16,8 +16,8 @@ module.exports = function ({wheelCircumference}) {
 
     const power$ = new Observable(observer => {
         powerSensor.on('powerData', data => {
+            console.log(`⚡️ Ant+ Power: ${data.Power}`);
             observer.next(data.Power)
-            console.log(`id: ${data.DeviceID}, cadence: ${data.Cadence}, power: ${data.Power}`);
         });
     });
 
@@ -25,15 +25,14 @@ module.exports = function ({wheelCircumference}) {
         speedSensor.setWheelCircumference(wheelCircumference || 2.120); //Wheel circumference in meters
 
         speedSensor.on('speedData', data => {
+            console.log(`🏎️ Ant+ Speed: ${data.CalculatedSpeed}`);
             observer.next(data.CalculatedSpeed)
-        });
-        speedSensor.on('spe', async function (data) {
-            observer.next(data.ComputedHeartRate)
         });
     });
 
     const hr$ = new Observable(observer => {
         hrSensor.on('hbData', async function (data) {
+            console.log(`🧡 Ant+ HR: ${data.ComputedHeartRate}`);
             observer.next(data.ComputedHeartRate)
         });
     });

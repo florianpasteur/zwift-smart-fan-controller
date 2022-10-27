@@ -1,7 +1,7 @@
 const fs = require('fs');
-const Ant = require('../ant-plus/ant-plus');
-const Zwift = require('../zwift/zwift');
-const SmartFan = require('../smart-fan/smart-fan');
+const Ant = require('../data-provider/ant-plus/ant-plus');
+const Zwift = require('../data-provider/zwift/zwift');
+const SmartFan = require('../device-controller/smart-fan/smart-fan');
 const yargs = require("yargs");
 const {hideBin} = require("yargs/helpers");
 
@@ -14,7 +14,7 @@ const options = yargs(hideBin(process.argv))
 
 
 function getDataSource(config) {
-    switch (config.dataSource) {
+    switch (config.dataProvider) {
         case "ant":
             return  new Ant({wheelCircumference: config.antConfig.wheelCircumference});
         case "zwift":
@@ -39,31 +39,18 @@ function getLevel(value, thresholds) {
 
 if (fs.existsSync(options.config)) {
     const config = JSON.parse(fs.readFileSync(options.config).toString());
-    const dataSource = getDataSource(config);
+    const dataProvider = getDataSource(config);
     const smartFan = SmartFan({fanIP: config.fanIP});
 
-    switch (config.trigger) {
+    switch (config.observedData) {
         case "power":
-            dataSource.power$.subscribe(value => {
-                console.log("Power", value);
-                const thresholds = config.thresholds.power;
-                const level = getLevel(value, thresholds);
-                smartFan.fanLevel(level);
-            })
+            dataProvider.power$.subscribe(value => smartFan.fanLevel(getLevel(value, config.thresholds.power)))
             break;
         case "speed":
-            dataSource.speed$.subscribe(value => {
-                const thresholds = config.thresholds.speed;
-                const level = getLevel(value, thresholds);
-                smartFan.fanLevel(level);
-            })
+            dataProvider.speed$.subscribe(value => smartFan.fanLevel(getLevel(value, config.thresholds.speed)))
             break;
         case "hr":
-            dataSource.hr$.subscribe(value => {
-                const thresholds = config.thresholds.hr;
-                const level = getLevel(value, thresholds);
-                smartFan.fanLevel(level);
-            })
+            dataProvider.hr$.subscribe(value => smartFan.fanLevel(getLevel(value, config.thresholds.hr)))
             break;
     }
 }
