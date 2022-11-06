@@ -1,5 +1,12 @@
 # Zwift Smart Fan
 
+
+# Project description
+
+I built a smart fan for Zwift, from a cheap fan and connected it to the Zwift game. The fan speed adapts based on the power, speed or hear rate from the Zwift game data or from the bike sensors directly. 
+
+# Roots
+
 As a triathlete, at some point, I had to start indoor training to train on some specifics aspect of my physical condition. If you're reading this you may already know that indoor training is strongly synonymous with Zwift training, so I started training with this app, and it didn't take me long before realizing that cooling is central to indoor training. I google "Zwift Fans" and after seeing a few price tags I closed my browser and decided to find another and cheaper solution. The idea of spending 200€+ on a fan was a no-go, and making my own solution instead sounded more appealing to me. So here we are, and even though other great articles are already out there I decided to share the implementation of my DIY Smart Zwift fan with you, and I hope you'll find it useful to make your own as-is or to adapt it to your needs.
 
 # Costs
