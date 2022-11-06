@@ -57,4 +57,8 @@ if (fs.existsSync(options.config)) {
             dataProvider.hr$.subscribe(value => smartFan.fanLevel(getLevel(value, config.thresholds.hr)))
             break;
     }
+
+    process.on('exit', () => {
+        smartFan.fanLevel(0)
+    });
 }
