@@ -59,6 +59,13 @@ To configure command use a JSON config file.
   - `pullingInterval`: Pulling interval in milliseconds, (keep a value not too high)
 
 
+# Installation
+
+```bash
+npm install -g git+ssh://git@github.com-personal:florianpasteur/zwift-smart-fan-controller.git
+```
+
+
 <a name="get-zwift-id"></a>
 # Get Zwift ID
 
