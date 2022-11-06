@@ -5,7 +5,7 @@ module.exports = function ({zwiftID, pullingInterval}) {
     const subject= new Subject();
     const power$ = new Observable(observer => {
         subject.subscribe(({power}) => {
-            console.log(`⚡️ Zwift Power: ${Power}`);
+            console.log(`⚡️ Zwift Power: ${power}`);
             observer.next(power);
         })
     });
