@@ -1,6 +1,5 @@
 const {Observable, Subject} = require("rxjs");
 const axios = require("axios");
-const https = require("https");
 
 module.exports = function ({zwiftID, pullingInterval}) {
     const subject= new Subject();
@@ -25,11 +24,7 @@ module.exports = function ({zwiftID, pullingInterval}) {
 
     setInterval(async () => {
         try {
-            const agent = new https.Agent({
-                rejectUnauthorized: false
-            });
             const response = await axios.get('https://www.zwiftgps.com/world/', {
-                httpAgent: agent,
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
                     'Cookie': 'zssToken=rider-'+zwiftID,
