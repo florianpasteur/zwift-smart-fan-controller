@@ -9,7 +9,7 @@ Before we dive into the tutorial, here are the elements I used for this project 
 - Fan with a mechanical switch: 30€
 - Relay board: around 3€
 - ESP8266: 3€ I choose the WeMos D1 Mini but any ESP will do the job
-- Ant+ receiver: 10€
+- Ant+ receiver: 10€ (Optional)
 
 Total: 46€
 
@@ -56,10 +56,71 @@ On the main page now you should have 3 **Toggle** buttons that appeared, each bu
 
 # 3. The software
 
-The Zwift API is not public anymore, making difficult to retrieve data in real time to control the fan. So I decided to use directly the data from the sensors to trigger the fan speed. I ran quickly into the 
+The Zwift API is not public anymore, making difficult to retrieve data in real time to control the fan. So there are 2 options, using a second Ant+ Stick to retrieve the data from the sensors directly, or using a third party app.
+
+Ok let me show you how to setup the third party app. Login to your Zwift account on the website and head to [Account > Connections](https://www.zwift.com/eu/settings/connections) and scroll down to the end. You should see `Consent to sharing your real time Zwift activities and profile with Zwift GPS and Gold Rush.` 
+
+![](doc/s-zwift-connections.png)
+
+- click on `Opt-in`. The page should reload and the icon is now colored. 
+
+![](doc/s-zwift-connections-enable.png)
+ 
+- Next step is about finding your Zwift ID, there are few tutorials out there to find or you can use the official documentation to find it https://support.zwift.com/en_us/locating-your-zwift-id-H1WiyxS_I
+
+![](doc/s-zwift-get-zwift-id.png)
+
+Lastly get the code and run the program. You'll find the sources on my github repo at https://github.com/florianpasteur/zwift-smart-fan-controller
+
+Create a JSON configuration file lke so: 
+
+```json
+{
+  "fanIP": "192.168.1.127",
+  "dataProvider": "zwift",
+  "observedData": "power",
+  "antConfig": {
+    "wheelCircumference": 2.120
+  },
+  "zwiftConfig": {
+    "zwiftID": 1231421,
+    "pullingInterval": 2500
+  },
+  "thresholds": {
+    "power": {
+      "level1": 0,
+      "level2": 10,
+      "level3": 20
+    },
+    "speed": {
+      "level1": 0,
+      "level2": 20,
+      "level3": 30
+    },
+    "hr": {
+      "level1": 70,
+      "level2": 120,
+      "level3": 150
+    }
+  }
+}
+```
+
+Replace the 
+- `fanIP` by the IP or hostname of the ESP
+- `dataProvider` leave `zwift` value. (Use `ant` value if you want to use the second ant+ stick)
+- `observedData` choose from `power`, `speed`, `hr` depending on your preference and adjust the corresponding `thresholds`
+- `zwiftID`: Your zwift ID 
+- `pullingInterval` Adjust the pulling interval (in ms). Keep a high value to not experience a too frequent speed change.
+
+To run the program use the command 
+
+```
+> zwift-smart-fan-controller  --config your-config.json
+```
 
 # 4. Finish
 
-Put everything back in the case and screw it back to the fan.
+Put everything back in the case and screw it back to the fan and that's it. You're ready to ride !
 
 ![](doc/p-fan-finished.jpg)
