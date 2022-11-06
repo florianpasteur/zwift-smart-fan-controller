@@ -1,21 +1,35 @@
 const {Observable, Subject} = require("rxjs");
 const axios = require("axios");
+const https = require("https");
 
 module.exports = function ({zwiftID, pullingInterval}) {
     const subject= new Subject();
     const power$ = new Observable(observer => {
-        subject.subscribe(({power}) => observer.next(power))
+        subject.subscribe(({power}) => {
+            console.log(`⚡️ Zwift Power: ${Power}`);
+            observer.next(power);
+        })
     });
     const speed$ = new Observable(observer => {
-        subject.subscribe(({speed}) => observer.next(speed))
+        subject.subscribe(({speed}) => {
+            console.log(`🏎️ Zwift Speed: ${speed}`);
+            observer.next(speed);
+        })
     });
     const hr$ = new Observable(observer => {
-        subject.subscribe(({hr}) => observer.next(hr))
+        subject.subscribe(({hr}) => {
+            console.log(`🧡 Zwift HR: ${hr}`);
+            observer.next(hr);
+        })
     });
 
     setInterval(async () => {
         try {
+            const agent = new https.Agent({
+                rejectUnauthorized: false
+            });
             const response = await axios.get('https://www.zwiftgps.com/world/', {
+                httpAgent: agent,
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
                     'Cookie': 'zssToken=rider-'+zwiftID,
