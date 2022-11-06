@@ -62,7 +62,7 @@ To configure command use a JSON config file.
 # Installation
 
 ```bash
-npm install -g git+ssh://git@github.com-personal:florianpasteur/zwift-smart-fan-controller.git
+npm install -g git+ssh://git@github.com:florianpasteur/zwift-smart-fan-controller.git
 ```
 
 
