@@ -84,7 +84,7 @@ Create a JSON configuration file lke so:
   },
   "zwiftConfig": {
     "zwiftID": 1231421,
-    "pullingInterval": 2500
+    "pollingInterval": 2500
   },
   "thresholds": {
     "power": {
@@ -111,7 +111,7 @@ Replace the
 - `dataProvider` leave `zwift` value. (Use `ant` value if you want to use the second ant+ stick)
 - `observedData` choose from `power`, `speed`, `hr` depending on your preference and adjust the corresponding `thresholds`
 - `zwiftID`: Your zwift ID 
-- `pullingInterval` Adjust the pulling interval (in ms). Keep a high value to not experience a too frequent speed change.
+- `pollingInterval` Adjust the pulling interval (in ms). Keep a high value to not experience a too frequent speed change.
 
 To run the program use the command 
 

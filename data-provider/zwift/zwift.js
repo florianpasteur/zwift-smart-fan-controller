@@ -1,7 +1,7 @@
 const {Observable, Subject} = require("rxjs");
 const axios = require("axios");
 
-module.exports = function ({zwiftID, pullingInterval}) {
+module.exports = function ({zwiftID, pollingInterval}) {
     const subject= new Subject();
     const power$ = new Observable(observer => {
         subject.subscribe(({power}) => {
@@ -39,7 +39,7 @@ module.exports = function ({zwiftID, pullingInterval}) {
         } catch (e) {
             console.error(e)
         }
-    }, pullingInterval)
+    }, pollingInterval)
 
     return {
         power$,

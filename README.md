@@ -26,7 +26,7 @@ To configure command use a JSON config file.
   },
   "zwiftConfig": {
     "zwiftID": 1231421,
-    "pullingInterval": 2500
+    "pollingInterval": 2500
   },
   "thresholds": {
     "power": {
@@ -56,7 +56,7 @@ To configure command use a JSON config file.
   - `wheelCircumference`: size of the wheel in meters - [Size chart](https://www.bikecalc.com/wheel_size_math#:~:text=Wheel%20diameter%20%3D%20(rim%20diameter),circumference%20%3D%20Wheel%20diameter%20*%20PI.)
 - `zwiftConfig`: Specific configuration for `zwift` data provider
   - `zwiftID`: Your zwift ID, more detail in the [Get Zwift ID](#get-zwift-id) Section
-  - `pullingInterval`: Pulling interval in milliseconds, (keep a value not too high)
+  - `pollingInterval`: Pulling interval in milliseconds, (keep a value not too high)
 
 
 # Installation

@@ -20,9 +20,9 @@ function getDataSource(config) {
         case "ant":
             return  new Ant({wheelCircumference: config.antConfig.wheelCircumference});
         case "zwift":
-            return new Zwift({zwiftID: config.zwiftConfig.zwiftID, pullingInterval: config.zwiftConfig.pullingInterval})
+            return new Zwift({zwiftID: config.zwiftConfig.zwiftID, pollingInterval: config.zwiftConfig.pollingInterval})
         case "mock":
-            return new Mock({pullingInterval: 5000})
+            return new Mock({pollingInterval: 5000})
         default:
             throw new Error('Unsupported data provider:  ' + config.dataProvider);
     }

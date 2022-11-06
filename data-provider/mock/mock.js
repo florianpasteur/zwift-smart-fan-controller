@@ -12,22 +12,22 @@ function getThresholds(index, thresholds) {
         return thresholds.level1
     }
 }
-module.exports = function ({pullingInterval}) {
-    const power$ = interval(pullingInterval).pipe(
+module.exports = function ({pollingInterval}) {
+    const power$ = interval(pollingInterval).pipe(
         map(index => {
             const value = getThresholds(index, configExample.thresholds.power);
             console.log(`⚡️ Mock Power: ${value}`);
             return value;
         })
     )
-    const speed$ = interval(pullingInterval).pipe(
+    const speed$ = interval(pollingInterval).pipe(
         map(index => {
             const value = getThresholds(index, configExample.thresholds.speed);
             console.log(`🏎️ Mock Speed: ${value}`);
             return value;
         })
     )
-    const hr$ = interval(pullingInterval).pipe(
+    const hr$ = interval(pollingInterval).pipe(
         map(index => {
             const value = getThresholds(index, configExample.thresholds.hr);
             console.log(`🧡 Mock HR: ${value}`);
